@@ -34,7 +34,7 @@
 	raw code
 	sample list
 	
-* anything else worthwile reporting on under any section according to presentation slides each of us presented
+* anything else worthwile reporting on under any section according to presentation slides each of us presented. write a paragraph (+ figures etc.)
 
 
 

@@ -1,0 +1,176 @@
+% ----------------------------------------------------------------------------
+% Template for Learning Diaries
+% Leonardo Fierro, Aalto University, January 2021
+% Last modified: Tue Jan 10 2023, Leonardo Fierro
+% ----------------------------------------------------------------------------
+
+\documentclass[notitlepage]{article}
+
+% ----------------------------------------------------------------------------
+% Packages
+% ----------------------------------------------------------------------------
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{hyperref}
+\usepackage{gensymb}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{subcaption}
+\usepackage[super]{nth}
+
+% ----------------------------------------------------------------------------
+% Basic Document Settings - DO NOT MODIFY
+% ----------------------------------------------------------------------------
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.15in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass}
+\rhead{\hmwkTitle}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+\author{\vspace{-5ex}}
+\date{\vspace{-5ex}}
+\newcommand{\hmwkClass}{ELEC-E5620 Audio Signal Processing 2023}
+
+% ---------------------------------------------------------------------------
+% || ADD HERE YOUR INFORMATION ||
+% ---------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Report}     % Exercise number
+\newcommand{\hmwkAuthorName}{Pi, Wang, Benc}   % Your student data
+\title{Demo Project: Moog Ladder Filter}         % Lecture title
+% ---------------------------------------------------------------------------
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+% ---------------------------------------------------------------------------
+% Your assignment text starts HERE:
+% ---------------------------------------------------------------------------
+% \begin{abstract}
+% Foobar.
+% \end{abstract}
+
+\section*{Introduction}
+\label{sec:introduction}
+The purpose of the project was to become familiar with the saturating resonant filter, which is often used in music production. The task at hand was to create a biquad filter with nonlinear elements and explore the effects of different topologies and non-linearities, particularly on stability and coloration. The implementation was successfully accomplished in MATLAB, and satisfactory results were achieved, in terms of various colorations.
+
+\section*{Background}
+\label{sec:background}
+Here, provide some background information necessary to understand the project. This may include theoretical foundations, previous work in the field, or any other context that sets the stage for your project.
+
+\section*{Implementations}
+\label{sec:implementations}
+Detail your implementations in this section. Describe the methodology, tools, technologies, and processes you used in the project. Include any challenges you faced and how you overcame them.
+
+\section*{Experiments and Results}
+\label{sec:experiments}
+This section should detail the experiments you conducted and the results you obtained. Include data, figures, and any other relevant information that demonstrates the outcomes of your project. Discuss any patterns, anomalies, or insights gleaned from your experiments.
+
+\section*{Individual Contributions}
+\label{sec:contributions}
+Outline the individual contributions of each student to the overall project. This section ensures clarity on who was responsible for each part of the project and acknowledges each student's efforts.
+
+\section*{Conclusion}
+\label{sec:conclusion}
+Conclude your report by summarizing the main findings, the significance of your work, and any potential future work. Reflect on the project's success and any lessons learned.
+
+\section*{References}
+
+\section*{Appendix}
+
+\end{document}
+
+% \begin{figure}[ht]
+%     \centering
+%     \begin{subfigure}[b]{0.49\textwidth}
+%         \includegraphics[width=\textwidth]{plot_f.png}
+%     \end{subfigure}
+%     \begin{subfigure}[b]{0.49\textwidth}
+%         \includegraphics[width=\textwidth]{plot_m.png}
+%     \end{subfigure}
+%     \caption{'F0 estimation using the autocorrelation method [3,4]'}
+%     \label{fig:images}
+% \end{figure}
+ 
+% \section*{Title and Student data}
+
+% Please modify the highlighted parts in the code to input the following:
+% \begin{itemize}
+%     \item your student data: Name, Surname, ID.
+%     \item the learning diary number: 1, 2, 3...
+%     \item the lecture topic (title).
+% \end{itemize}
+
+% Your student data is visualized on the top left corner of the document.
+
+% \section*{Formatting}
+% With LaTeX, you do not need to care about the formatting. How cool is that?
+% You can divide your report in sections to give a structure and improve readability. 
+
+% You can divide your text in sections if needed. Please refrain from using subsections. You can use the command "medskip" to create small paragraphs inside a section.
+
+% The minimum length for the learning diary is 500 words using this template. The ideal length using this template is 1.5/2 pages. 
+
+% \medskip
+% You are encouraged to use references in your text. Please look at the code to see how to reference an article or other document. A reference will create an hyperlink to the bibliography section, like this \cite{fierro2019adaptive}.
+
+% \section*{Images}
+
+% You can add images relevant to what you are discussing in your diary. Please not that the space the image takes and the caption do not count for reaching the minimum length of text.
+
+% \begin{figure}[h!]
+% \center
+% \includegraphics[width=0.5\textwidth]{Img/Echo.png}
+% \caption{\label{fig:diagram}{\it This is how you add an image in LaTeX.}}
+% \end{figure}
+
+% -------------------------------------------------------
+% Bibliography: if necessary, add here your references
+% -------------------------------------------------------
+
+% \begin{thebibliography}{10}
+% % Example
+
+% \bibitem{1}              
+% S. K. Mitra, \textit{Digital signal processing: a computer-based approach}. New York, Ny: Mcgraw-Hill, 2011.
+
+% \bibitem{2}
+% V. Välimäki and J. Reiss, “All About Audio Equalization: Solutions and Frontiers,” Applied Sciences, vol. 6, no. 5, p. 129, May 2016, doi: \nolinkurl{https://doi.org/10.3390/app6050129}.
+
+% \bibitem{3}              
+% J. Liski and V. Välimäki, “The quest for the best graphic equalizer,” pp. 95–102, Jan. 2017.
+
+
+% \end{thebibliography}
+
+
+
+\bibliographystyle{unsrt}
+\bibliography{references}
