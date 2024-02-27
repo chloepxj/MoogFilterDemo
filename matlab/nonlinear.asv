@@ -34,7 +34,7 @@ clear; clc; close all;
 
 fc=1000;
 Q=10;
-topology = '9';
+topology = '3';
 nonlinearity = 'tanh';
 
 filename = 'samples/drums.wav';
@@ -50,24 +50,24 @@ b2=(1-cos(w))/2;
 a1=-2*cos(w);
 a2=1-alpha;
 
-% %% Stability test
-% % Assuming that the corresponding linear filter is stable, the nonlinear
-% % feedback filter will be stable provided the absolute value of the
-% % derivative of fnn is always less than or equal to 1. [2]
-% 
-% b = [b0, b1, b2];
-% a = [1, a1, a2];
-% flag = isstable(b, a); 
-% 
-% figure;
-% zplane(b, a);
-% title('Pole-zero plot');
-% 
-% if flag==1
-%     disp('Corresponding linear filter is stable.');
-% else
-%     disp('Corresponding linear filter is unstable.');
-% end
+%% Stability test
+% Assuming that the corresponding linear filter is stable, the nonlinear
+% feedback filter will be stable provided the absolute value of the
+% derivative of fnn is always less than or equal to 1. [2]
+
+b = [b0, b1, b2];
+a = [1, a1, a2];
+flag = isstable(b, a); 
+
+figure;
+zplane(b, a);
+title('Pole-zero plot');
+
+if flag==1
+    disp('Corresponding linear filter is stable.');
+else
+    disp('Corresponding linear filter is unstable.');
+end
 
 %% Nonlinearity function
 % Defining nonlinearity function used for saturation.
@@ -129,7 +129,7 @@ for i=1:size(inputSignal, 2)
                 outputSignal(n, i) = ...
                     b0 * inputSignal(n, i) + ...
                     b1 * inputSignal(n - 1, i) - ...
-                    fnl(a1 * outputSignal(n - 1, i)) + ...
+                    a1 * outputSignal(n - 1, i) + ...
                     b2 * inputSignal(n - 2, i) - ...
                     a2 * outputSignal(n - 2, i);
             case '6'
@@ -138,28 +138,28 @@ for i=1:size(inputSignal, 2)
                     b1 * inputSignal(n - 1, i) - ...
                     a1 * outputSignal(n - 1, i) + ...
                     b2 * inputSignal(n - 2, i) - ...
-                    fnl(a2 * outputSignal(n - 2, i));
+                    a2 * outputSignal(n - 2, i);
             case '7'
                 outputSignal(n, i) = ...
                     b0 * inputSignal(n, i) + ...
                     b1 * inputSignal(n - 1, i) - ...
-                    fnl(a1 * outputSignal(n - 1, i)) + ...
+                    a1 * outputSignal(n - 1, i) + ...
                     b2 * inputSignal(n - 2, i) - ...
-                    fnl(a2 * outputSignal(n - 2, i));     
+                    a2 * outputSignal(n - 2, i);     
             case '8'
                 outputSignal(n, i) = ...
-                    fnl(b0 * inputSignal(n, i) + ...
+                    b0 * inputSignal(n, i) + ...
                     b1 * inputSignal(n - 1, i) - ...
                     a1 * outputSignal(n - 1, i) + ...
                     b2 * inputSignal(n - 2, i) - ...
-                    a2 * outputSignal(n - 2, i));                 
+                    a2 * outputSignal(n - 2, i);                 
             case '9'
                 outputSignal(n, i) = ...
-                    fnl(b0 * inputSignal(n, i)) + ...
+                    b0 * inputSignal(n, i) + ...
                     b1 * inputSignal(n - 1, i) - ...
-                    fnl(a1 * outputSignal(n - 1, i)) + ...
+                    a1 * outputSignal(n - 1, i) + ...
                     b2 * inputSignal(n - 2, i) - ...
-                    fnl(a2 * outputSignal(n - 2, i));
+                    a2 * outputSignal(n - 2, i);
             otherwise
                 error('Invalid topology.');
         end
@@ -181,7 +181,7 @@ normalizedOutputSignal = outputSignal ./ absoluteMaxValue;
 
 soundsc(normalizedOutputSignal, fs);
 
-% [filepath, name, ext] = fileparts(filename);
-% newFilename = sprintf('%s/%s_%s_%s%s', filepath, name, topology, nonlinearity, ext);
-% audiowrite(newFilename, normalizedOutputSignal, fs);
+[filepath, name, ext] = fileparts(filename);
+newFilename = sprintf('%s/%s_%s_%s%s', filepath, name, topology, nonlinearity, ext);
+audiowrite(newFilename, normalizedOutputSignal, fs);
 
