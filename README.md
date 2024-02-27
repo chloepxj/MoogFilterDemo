@@ -5,6 +5,10 @@
 	moog history - I
 	moog tech aspect - C
 	biquad, nonlinearity (main reference summary) - J
+biquad filter, second order IIR filter, as a common filter in audio signal processing, has strong performance. By adjusting the positions of the two zeros and two poles, the biquad filter can achieve different effects. At the same time, due to the presence of formants, it can also emphasize some specific frequency audio signals. At the same time, many analog audio devices (such as filters for analog synthesizers) have natural resonance properties. When simulating these devices in the digital domain, precisely controlling the resonance peak can help more realistically reproduce the sound characteristics of the analog device.
+
+The nonlinear functions used in biquad filter can be divided into two categories according to their effects: hard saturating function and soft saturating fuction. Signals processed in a hard saturating process are quickly limited to a certain threshold after reaching it, and do not increase. This method will produce a significant clipping effect when the signal exceeds the saturation point, resulting in a more powerful, sharp sound effect. The hard saturating is smoother, the signal doesn't fade as quickly, and the resulting sound is warmer.
+
 	
 # implementation
 
@@ -21,6 +25,7 @@
 	testing - all
 	code - all
 	stability testing theory - J
+Linear system realizes the function of nonlinear system by adding nonlinear function. For linear systems, the method of analysis is very simple, because the signal we analyze is a discrete time signal, so we only need to ensure that all the poles are in the unit circle to ensure the stability of the system. For the linear part, all the poles of our filter satisfy this condition, as shown in Figure XX, so the linear part is stable. However, for nonlinear systems, due to the introduction of nonlinear functions, the system may meet the condition of stability of the poles, but still appear unstable. Then we need a new stability criterion to judge the stability of the whole system. According to the analysis of X, we need to divide the nonlinear system into nonlinear part and linear part. As for the whole non-detailed filter, the absolute value of the derivative of the nonlinear function is always less than 1 under the premise of satisfying linear stability. The three nonlinear functions we selected all satisfy this condition, as shown in Figure XX. At the same time, we can also use the Lyaplov stability criterion to judge whether a system is stable, but here it is too complicated. In our experiment, we chose to observe whether the audio signal processed by the filter is stable and there is no obvious distortion phenomenon to judge whether the filter is stable. In the audio we obtained, in addition to the infinite value of the file corresponding to the second and sixth filter structures, indicating that the second and sixth filters are unstable, all the other audio is clear and logical, and there is no obvious distortion, indicating that the other filters are stable in this case.
 	plugin (source code tweaking & demonstrating) short description - C
 	presentation - I
 	report - all
