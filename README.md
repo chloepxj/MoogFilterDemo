@@ -2,27 +2,22 @@ Latex project:
 https://www.overleaf.com/3335284478zzthshdbsvqv#6bc449
 
 # TODO
-# background
+## background
 	
-# implementation
+## implementation
 	
-# exp & res
+## exp & res
 	differences in timbre & magnitude freq responses
- 	plugin
+ 	plugin (short paragraph about tools used)
   
-# individual contrib
-	research - all
-	testing - all
-	code - all
-	stability testing theory - J
-	plugin (source code tweaking & demonstrating) short description - C
-	presentation - I
-	report - all
+## individual contrib
+	short paragraph:
+		research, coding, testing, report - all, stability testing theory - J, 	plugin (source code tweaking & demonstrating) - C, presentation - I
 
-# conclusion
+## conclusion
 	additional conclusion based on results, bla
 
-# appendix
+## appendix
 	raw code
 	samples directory list
 	
