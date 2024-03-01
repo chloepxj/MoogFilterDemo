@@ -1,0 +1,34 @@
+\section*{Introduction}
+\label{sec:introduction}
+Our project aimed to explore the dynamics of the saturating resonant filter, a crucial component in music production, known for its unique ability to add coloration to audio signals. We developed a biquad filter, embedded with nonlinear elements in MATLAB, to investigate the impact of varying topologies and nonlinearities on filter stability and sound coloration [1]. The successful implementation of these filters demonstrated significant variations in coloration, affirming the potential of such filters in digital audio processing.
+
+\section*{Background}
+\label{sec:background}
+Biquad filters are a kind of Infinite Impulse Response (IIR) filter that is widely used in audio signal processing. They are highly versatile and can be used to modulate audio effects through pole and zero adjustments, making them an integral part of digital audio applications. In the case of analog audio devices, natural resonance is often present, and replicating this in digital form requires precise resonance peak control to reproduce the analog sound characteristics accurately.
+
+The "ladder filter" is a type of filter designed by Robert Moog that features a series of one-pole filters coupled with a global feedback loop. This design enables direct manipulation of resonance and cutoff frequencies. In digital realms, the inherent nonlinearity of analog filters at high signal levels, leading to distortion, is emulated through saturating nonlinearities, thereby mirroring the analog circuit behaviors such as harmonic distortion and resonance variability.
+
+Nonlinear functions within biquad filters can be classified into hard and soft saturating functions, each imparting distinct sound effects. Hard saturation introduces a pronounced clipping effect beyond a certain threshold, while soft saturation yields a warmer, more gradual sound transition.
+
+Our project's theoretical framework is centered on the integration of nonlinear elements within biquad filters, aiming to elucidate their influence on filter stability and audio signal coloration. The purpose of using nonlinear functions is to mimic the dynamic response of analog filters, thereby enriching digital audio with desirable sound characteristics.
+
+\section*{Implementations}
+\label{sec:implementations}
+
+In our project, we examined how nonlinear functions impact system stability and sound coloration when incorporated into a traditional biquad filter structure. Ensuring consistent filter performance requires stability analysis. Linear system stability can be easily evaluated via pole placement, but nonlinear systems require additional stability criteria. According to the analysis [2], for a nonlinear filter to be stable, the absolute value of the derivative of the nonlinear function should always be less than 1. The three nonlinear functions we selected satisfied this condition, as shown in Figure 1. However, some tested topologies, specifically the second and sixth in Figure 2, produced infinite values in our filtered signal, suggesting the insufficiency of the method. Another approach proposed in the literature [?] - the use of the Lyaplov stability criterion - proved too complicated for us to utilize. Other tested topologies produced the expected results, both in terms of stability and sonic characteristics.
+
+\section*{Experiments and Results}
+\label{sec:experiments}
+The experiments were methodically designed to evaluate the impact of different nonlinear functions and filter topologies on audio signal processing. Employing a variety of audio samples, we systematically altered the nonlinear module's position and analyzed the resultant audio coloration and system stability. [Placeholder for data presentation and analysis]. Our findings indicate a direct correlation between the nonlinear module's positioning and the filter's sonic output, with certain configurations yielding instability despite the satisfied criteria.
+
+\section*{Discussion}
+\label{sec:discussion}
+The experimental outcomes significantly align with our theoretical predictions, affirming the profound impact of nonlinearities on filter behavior. Notably, the placement of nonlinear elements within the filter architecture emerged as a sufficient factor in achieving various sound coloration while maintaining stability. The anomalies observed, particularly the instability in specific configurations, invite further investigation into the interaction between nonlinearity and filter architecture.
+
+\section*{Individual Contributions}
+\label{sec:contributions}
+[Placeholder for detailed contributions of each team member, ensuring clarity in roles and acknowledging efforts towards project objectives.]
+
+\section*{Conclusion}
+\label{sec:conclusion}
+This project illuminated the significant influence of nonlinear elements and filter topologies on the perceived timbre and stability of digital filters. By experimenting with different nonlinear functions and configurations, we demonstrated the versatility and complexity of designing filters that emulate analog characteristics in a digital environment. Future research directions include enhancing the efficiency of filter structures and delving deeper into the effects of nonlinear module positioning on system stability and audio quality.

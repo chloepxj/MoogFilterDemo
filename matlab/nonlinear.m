@@ -2,7 +2,7 @@
 % Pi, Wang, Benc
 %
 % Implements and demonstrates nonlinearity by saturating different members
-% of the difference equation of the filter.
+% of the difference equation of the second-order biquad filter.
 % 
 % References:
 % [1] Configure the Coefficients for Digital Biquad Filters in
@@ -13,13 +13,14 @@
 % (DAFx-20), Vienna, Austria, September 8–12, 202.
 %
 % Parameters:
-% fc    - Center frequency (Hz).
+% fc    - Cut-off frequency (Hz).
 % Q     - Quality value (dB).
 % fs    - Sampling frequency (Hz).
 % topology  - Filter topology. Options: 
 %               '0', ..., '9' - According to the chart attatched to the code.
 % nonlinearity  - Nonlinearity type. Options:
-%                   'soft' - Soft saturator. 'hard' - Hard saturator.
+%                   'soft' - Soft saturator. 
+%                   'hard' - Hard saturator.
 %                   'tanh' - Tanh saturator.
 % fs    - Sampling frequency (Hz).
 % inputSignal   - Wave signal.
@@ -28,17 +29,29 @@
 % normalizedOutputSignal  - Nomalized filtered signal.
 
 %%
+
 clear; clc; close all;
 
 %% Parameters
 
 fc=1000;
 Q=10;
-topology = '9';
-nonlinearity = 'tanh';
+topology = '1';
+nonlinearity = 'hard';
 
-filename = 'samples/drums.wav';
+%% Input signal
+
+% % Generate a logarithmic chirp signal
+% fs = 48e3;
+% t = 0:1/fs:10;
+% f0 = 20;
+% f1 = 20000;
+% y = chirp(t, f0, max(t), f1, 'logarithmic');
+% audiowrite('samples/sweep.wav', y, fs);
+
+filename = 'samples/sweep.wav';
 [inputSignal, fs] = audioread(filename);
+
 
 %% Calculation of the biquad filter coefficients [1]
 
@@ -50,24 +63,24 @@ b2=(1-cos(w))/2;
 a1=-2*cos(w);
 a2=1-alpha;
 
-% %% Stability test
-% % Assuming that the corresponding linear filter is stable, the nonlinear
-% % feedback filter will be stable provided the absolute value of the
-% % derivative of fnn is always less than or equal to 1. [2]
-% 
-% b = [b0, b1, b2];
-% a = [1, a1, a2];
-% flag = isstable(b, a); 
-% 
-% figure;
-% zplane(b, a);
-% title('Pole-zero plot');
-% 
-% if flag==1
-%     disp('Corresponding linear filter is stable.');
-% else
-%     disp('Corresponding linear filter is unstable.');
-% end
+%% Stability test
+% Assuming that the corresponding linear filter is stable, the nonlinear
+% feedback filter will be stable provided the absolute value of the
+% derivative of fnn is always less than or equal to 1. [2]
+
+b = [b0, b1, b2];
+a = [1, a1, a2];
+flag = isstable(b, a); 
+
+figure;
+zplane(b, a);
+title('Pole-zero plot');
+
+if flag==1
+    disp('Corresponding linear filter is stable.');
+else
+    disp('Corresponding linear filter is unstable.');
+end
 
 %% Nonlinearity function
 % Defining nonlinearity function used for saturation.
@@ -100,8 +113,8 @@ for i=1:size(inputSignal, 2)
             case '1'
                 outputSignal(n, i) = ...
                     b0 * inputSignal(n, i) + ...
-                    fnl(b1 * inputSignal(n - 1, i) - ...
-                    a1 * outputSignal(n - 1, i)) + ...
+                    b1 * inputSignal(n - 1, i) - ...
+                    a1 * outputSignal(n - 1, i) + ...
                     b2 * inputSignal(n - 2, i) - ...
                     a2 * outputSignal(n - 2, i);
             case '2'
@@ -171,6 +184,7 @@ if any(isinf(outputSignal), 'all')
 end
 
 %% Normalization
+% Avoid clipping.
 
 maxValues = max(outputSignal);
 minValues = min(outputSignal);
@@ -179,8 +193,8 @@ normalizedOutputSignal = outputSignal ./ absoluteMaxValue;
 
 %% Results
 
-soundsc(normalizedOutputSignal, fs);
-
+% soundsc(normalizedOutputSignal, fs);
+% 
 % [filepath, name, ext] = fileparts(filename);
 % newFilename = sprintf('%s/%s_%s_%s%s', filepath, name, topology, nonlinearity, ext);
 % audiowrite(newFilename, normalizedOutputSignal, fs);
