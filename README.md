@@ -1,6 +1,6 @@
 Latex project:
 https://www.overleaf.com/3335284478zzthshdbsvqv#6bc449
-
+<!--
 # TODO
 ## background
 	
@@ -20,8 +20,7 @@ https://www.overleaf.com/3335284478zzthshdbsvqv#6bc449
 ## appendix
 	raw code
 	samples directory list
-	
-
+--!>
 
 
 
